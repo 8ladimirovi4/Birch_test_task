@@ -2,31 +2,37 @@ import 'antd/dist/antd.css'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { openAddModal } from '../ModalWindow/modalSlice';
 const { Header, Content, Footer, Sider } = Layout;
-const items1 = [
-    {
-        key: 0,
-        label: 'add',
-        onClick: function () {
-          console.log('1', )
-        }
-      },
+
+const SideBar = () => {
+    const dispatch = useDispatch()
+    const items1 = [
       {
-        key: 1,
-        label: 'edit',
-        onClick: function () {
-          console.log('2', )
-        }
-      },
-    {
-  key: 2,
-  label: 'delete',
-  onClick: function () {
-    console.log('3')
+          key: 0,
+          label: 'add',
+          onClick: function () {
+              dispatch(openAddModal())
+          }
+        },
+        {
+          key: 1,
+          label: 'edit',
+          onClick: function () {
+            console.log('2', )
+          }
+        },
+      {
+    key: 2,
+    label: 'delete',
+    onClick: function () {
+      console.log('3')
+    }
   }
-}
-];
-const items2 = [
+  ];
+
+  const items2 = [
     {
     key: 1,
     label: 'task',
@@ -35,7 +41,9 @@ const items2 = [
       }
     }
 ]
-const SideBar = () => (
+
+   return(
+    <>
   <Layout>
     <Header className="header">
       <div className="logo" />
@@ -86,5 +94,7 @@ const SideBar = () => (
     >
     </Footer>
   </Layout>
-);
+  </>
+   )
+}
 export default SideBar;

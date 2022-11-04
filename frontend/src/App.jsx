@@ -3,7 +3,8 @@ import Navigation from './Navigation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import Tasks from './features/pets/Tasks';
+import Tasks from './features/Tasks/Tasks';
+
 
 
 function App() {
