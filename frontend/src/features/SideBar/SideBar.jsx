@@ -80,7 +80,14 @@ dispatch(loadTasks())
             style={{
               height: '100%',
             }}
-            items={tasks.length ? [{label: 'task1'}] : [{label: "loading"}]}
+            items={
+              tasks.length 
+              ? 
+              tasks.map(el => {
+              return  {id: el.id, label: el.label, onClick: function () {console.log(el.id)}}
+            }) 
+            : 
+            [{label: "loading tasks"}]}
           />
         </Sider>
         <Content
