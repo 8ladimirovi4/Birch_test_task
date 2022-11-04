@@ -3,25 +3,38 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
 const { Header, Content, Footer, Sider } = Layout;
-const items1 = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-  const key = String(index + 1);
-  return {
-    key: `sub${key}`,
-    icon: React.createElement(icon),
-    label: `subnav ${key}`,
-    children: new Array(4).fill(null).map((_, j) => {
-      const subKey = index * 4 + j + 1;
-      return {
-        key: subKey,
-        label: `option${subKey}`,
-      };
-    }),
-  };
-});
+const items1 = [
+    {
+        key: 0,
+        label: 'add',
+        onClick: function () {
+          console.log('1', )
+        }
+      },
+      {
+        key: 1,
+        label: 'edit',
+        onClick: function () {
+          console.log('2', )
+        }
+      },
+    {
+  key: 2,
+  label: 'delete',
+  onClick: function () {
+    console.log('3')
+  }
+}
+];
+const items2 = [
+    {
+    key: 1,
+    label: 'task',
+    onClick: function () {
+        console.log('===>', )
+      }
+    }
+]
 const SideBar = () => (
   <Layout>
     <Header className="header">
@@ -38,9 +51,6 @@ const SideBar = () => (
           margin: '16px 0',
         }}
       >
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
       </Breadcrumb>
       <Layout
         className="site-layout-background"

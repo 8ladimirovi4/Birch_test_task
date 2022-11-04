@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
       <Navigation/>
       <Routes>
-        <Route path='/petlist' element={<Tasks/>}/>
+        <Route path='/' element={<Tasks/>}/>
         </Routes>
         </BrowserRouter>
         </Provider>
