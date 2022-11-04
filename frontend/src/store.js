@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import petsSlice from './features/pets/petsSlice';
+import tasksSlice from './features/tasksSlice';
+
 
 export default configureStore({
   reducer: {
-    pets: petsSlice,
+    pets: tasksSlice,
   },
 });
