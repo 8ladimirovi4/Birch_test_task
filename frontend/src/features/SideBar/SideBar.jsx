@@ -1,13 +1,15 @@
 import 'antd/dist/antd.css'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { openAddModal } from '../ModalWindow/modalSlice';
+import { loadTasks } from '../Tasks/tasksSlice';
 const { Header, Content, Footer, Sider } = Layout;
 
 const SideBar = () => {
     const dispatch = useDispatch()
+    const { tasks } = useSelector((state) => state.tasks)
     const items1 = [
       {
           key: 0,
@@ -32,15 +34,19 @@ const SideBar = () => {
   }
   ];
 
-  const items2 = [
-    {
-    key: 1,
-    label: 'task',
-    onClick: function () {
-        console.log('===>', )
-      }
-    }
-]
+//   const items2 = [
+//     {
+//     key: 1,
+//     label: 'task',
+//     onClick: function () {
+//         console.log('===>', )
+//       }
+//     }
+// ]
+
+useEffect(() => {
+dispatch(loadTasks())
+},[dispatch])
 
    return(
     <>
@@ -74,7 +80,7 @@ const SideBar = () => {
             style={{
               height: '100%',
             }}
-            items={items2}
+            items={tasks.length ? [{label: 'task1'}] : [{label: "loading"}]}
           />
         </Sider>
         <Content

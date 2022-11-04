@@ -1,8 +1,8 @@
 module.exports = {
   async up(queryInterface) {
-    const names = ['Елена', 'Денис О.', 'Лена', 'Воображаемая Лена', 'Денис П.', 'Анатолий'];
-    const owners = names.map((name) => ({
-      name, // name: name,
+    const lables = ['Елена', 'Денис О.', 'Лена', 'Воображаемая Лена', 'Денис П.', 'Анатолий'];
+    const owners = lables.map((lable) => ({
+      lable, // name: name,
       createdAt: new Date(),
       updatedAt: new Date(),
     }));

@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Pet extends Model {
     static associate({ PetType, Owner, PetOwner }) {
-      Pet.PetType = Pet.belongsTo(PetType, { foreignKey: 'typeId' });
+      Pet.PetType = Pet.belongsTo(PetType, { foreignKey: 'typeid' });
       Pet.Owners = Pet.belongsToMany(Owner, {
         through: PetOwner,
         foreignKey: 'petId',
@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
+    label: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    typeId: {
+    typeid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

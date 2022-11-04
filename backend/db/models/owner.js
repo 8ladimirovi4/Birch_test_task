@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
+    lable: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

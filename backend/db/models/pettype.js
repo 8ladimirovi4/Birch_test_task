@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class PetType extends Model {
     static associate({ Pet }) {
-      PetType.Pets = PetType.hasMany(Pet, { foreignKey: 'typeId' });
+      PetType.Pets = PetType.hasMany(Pet, { foreignKey: 'typeid' });
     }
   }
 

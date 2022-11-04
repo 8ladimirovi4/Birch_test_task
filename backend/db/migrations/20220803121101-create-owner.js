@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      lable: {
         type: Sequelize.TEXT,
         allowNull: false,
       },

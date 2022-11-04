@@ -7,11 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      label: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      typeId: {
+      typeid: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

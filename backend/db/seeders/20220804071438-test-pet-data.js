@@ -13,14 +13,9 @@ module.exports = {
     }));
 
     const petData = [
-      { typeId: 1, name: 'Плюша' },
-      { typeId: 1, name: 'Шиша' },
-      { typeId: 2, name: 'Изольда' },
-      { typeId: 3, name: 'Моя воображаемая собака' },
-      { typeId: 2, name: 'Моя воображаемая кошка' },
-      { typeId: 2, name: 'Феликс' },
-      { typeId: 2, name: 'Кусама' },
-      { typeId: 3, name: 'Лютик' },
+      { typeid: 1, label: 'task1' },
+      { typeid: 2, label: 'task2' },
+      { typeid: 3, label: 'task3' },
     ];
     const pets = petData.map((pet) => ({
       ...pet,
