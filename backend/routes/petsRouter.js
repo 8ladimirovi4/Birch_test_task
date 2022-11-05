@@ -75,4 +75,18 @@ petsRouter.get('/:petId/owners/:ownerId', (req, res) => {
   res.json(req.params);
 });
 
+//DELETE
+
+petsRouter.delete("/:id", async (req, res) => {
+  try {
+    await Pet.destroy({
+      where: {
+        id: Number(req.params.id),
+      },
+    });
+    res.json({success: true})
+  } catch ({message}) {
+    ({message: 'task didn\'t deleted'})
+  }
+})
 module.exports = petsRouter;

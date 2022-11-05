@@ -4,7 +4,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { openAddModal, openDelModal } from '../ModalWindow/modalSlice';
-import { loadTasks } from '../Tasks/tasksSlice';
+import { loadTasks, removeTask } from '../Tasks/tasksSlice';
 const { Header, Content, Footer, Sider } = Layout;
 
 const SideBar = () => {
@@ -74,7 +74,10 @@ dispatch(loadTasks())
               tasks.length 
               ? 
               tasks.map(el => {
-              return  {id: el.id, label: el.label, onClick: function () {dispatch(openDelModal())}}
+              return  {id: el.id, label: el.label, onClick: function () {
+                // dispatch(openDelModal())
+                dispatch(removeTask({id: el.id}))
+              }}
             }) 
             : 
             [{label: "loading tasks"}]}

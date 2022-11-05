@@ -11,6 +11,8 @@ module.exports = {
       { ownerId: 5, petId: 6 },
       { ownerId: 5, petId: 7 },
       { ownerId: 6, petId: 8 },
+      { ownerId: 6, petId: 9 },
+      { ownerId: 6, petId: 10 },
     ];
     const petOwners = petOwnerData.map((petOwner) => ({
       ...petOwner,
