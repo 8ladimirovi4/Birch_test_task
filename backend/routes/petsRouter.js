@@ -23,29 +23,43 @@ petsRouter.get('/', async (req, res) => {
 });
 
 // POST /pets
+// petsRouter.post('/', async (req, res) => {
+//   try {
+//     const newPet = await Pet.create(
+//       {
+//         label: req.body.petName,
+//         typeId: Number(req.body.petTypeId),
+//       },
+//     );
+//     const petType = await PetType.findByPk(newPet.typeId);
+
+//     res.json({
+//       error: null,
+//       data: {
+//         ...newPet.get(),
+//         PetType: petType,
+//       },
+//     });
+//   } catch (error) {
+//     res.json({
+//       error: error.message,
+//       data: null,
+//     });
+//   }
+// });
+
 petsRouter.post('/', async (req, res) => {
+  const  value = req.body.label;
+  console.log('===>', value);
   try {
-    const newPet = await Pet.create(
-      {
-        name: req.body.petName,
-        typeId: Number(req.body.petTypeId),
-      },
-    );
-
-    const petType = await PetType.findByPk(newPet.typeId);
-
-    res.json({
-      error: null,
-      data: {
-        ...newPet.get(),
-        PetType: petType,
-      },
+    const newTask = await Task.create({
+       id: '10',
+       label: value,
+       typeid: '1'
     });
-  } catch (error) {
-    res.json({
-      error: error.message,
-      data: null,
-    });
+    res.json(newTask);
+  } catch ({ message }) {
+    res.json({ message: "item not created" });
   }
 });
 

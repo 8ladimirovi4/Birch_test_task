@@ -9,11 +9,11 @@ module.exports = {
       },
       label: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       typeid: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'PetTypes', // название таблицы!
           key: 'id', // по умолчанию 'id', можно не писать

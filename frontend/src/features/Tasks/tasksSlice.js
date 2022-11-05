@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 const initialState = {
   tasks: [],
   error: null,
-  status: null
+  status: null,
 };
 
 const loadTasks = createAsyncThunk(
   'tasks/loadTasks',
   async function (_, { rejectWithValue }) {
     try {
-      const response = await fetch('http://localhost:3001/pets');
+      const response = await fetch('http://localhost:3001/tasks');
       const body = await response.json();
       if (body.error) {
         throw new Error(body.error);
@@ -24,16 +24,36 @@ const loadTasks = createAsyncThunk(
 );
 
 const delTask =  createAsyncThunk(
-  'tasks/delTasks',
+  'tasks/delTask',
   async function (id, {rejectWithValue, dispatch}) {
 try {
-  const response = await fetch (`http://localhost:3001/pets/${id}`,{
+  const response = await fetch (`http://localhost:3001/tasks/${id}`,{
     method: "DELETE",
   })
   if(!response){
     throw new Error ('Can\'t delete task, Server error')
   }
   dispatch(removeTask(id));
+} catch (error) {
+  return rejectWithValue(error.message)
+}
+  }
+)
+
+const createTask = createAsyncThunk(
+  'tasks/createTask',
+  async function (value, { rejectWithValue }) {
+try {
+  const response = await fetch('http://localhost:3001/tasks',{
+    method: "POST",
+    body: JSON.stringify({label: value}),
+    headers: { "Content-Type": "application/json" }
+  })
+  console.log('response', response);
+  if(!response){
+    throw new Error ('task didn\'t post')
+  }
+  const data = await response.json()
 } catch (error) {
   return rejectWithValue(error.message)
 }
@@ -66,5 +86,5 @@ const tasksSlice = createSlice({
 });
 
 export const { removeTask } = tasksSlice.actions
-export { loadTasks, delTask };
+export { loadTasks, delTask, createTask };
 export default tasksSlice.reducer;

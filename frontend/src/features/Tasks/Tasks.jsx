@@ -16,7 +16,6 @@ function Tasks() {
  <SideBar/>
 { addModalIsOpen ? <AddModalWindow/> : null}
 { delModalIsOpen ? <DelModalWindow/> : null }
-<button onClick={() => {dispatch(delTask('3'))}}>click</button>
     </div>
   );
 }

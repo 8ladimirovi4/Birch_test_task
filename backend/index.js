@@ -12,6 +12,7 @@ const petsRouter = require('./routes/petsRouter');
 const typesRouter = require('./routes/typesRouter');
 const authRouter = require('./routes/authRouter');
 const { sequelize } = require('./db/models');
+const tasksRouter = require('./routes/tasksRouter');
 
 // Веб-сервер
 const app = express();
@@ -55,7 +56,7 @@ app.use('/', indexRouter);
 app.use('/pets', petsRouter);
 app.use('/types', typesRouter);
 app.use('/auth', authRouter);
-
+app.use('/tasks', tasksRouter);
 // Слушать порт
 app.listen(PORT, async () => {
   /* eslint-disable no-console */

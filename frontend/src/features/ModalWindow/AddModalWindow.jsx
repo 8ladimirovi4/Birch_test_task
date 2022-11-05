@@ -1,6 +1,7 @@
 import { Modal } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux'
+import { createTask } from '../Tasks/tasksSlice';
 import { closeAddModal } from './modalSlice';
 
 const AddModalWindow = () => {
@@ -11,6 +12,7 @@ const AddModalWindow = () => {
   const dispatch = useDispatch()
   
   const handleOk = () => {
+    dispatch(createTask(taskTarget.current.value))
  console.log(taskTarget.current.value)
  console.log(descriptionTarget.current.value)
   };
