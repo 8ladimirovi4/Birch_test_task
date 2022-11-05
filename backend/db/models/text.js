@@ -1,4 +1,3 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
@@ -22,10 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     text: {
-      type: DataTypes.TEXT
-    },
-    taskid: {
-      type: DataTypes.INTEGER
+      allowNull: false,
+      type: DataTypes.TEXT,
     },
     createdAt: {
       allowNull: false,

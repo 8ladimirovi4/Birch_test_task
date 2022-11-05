@@ -1,16 +1,16 @@
 module.exports = {
   async up (queryInterface) {
     const textData = [
-      { taskid: 1, text: 'lorem1' },
-      { taskid: 2, text: 'lorem2' },
-      { taskid: 3, text: 'lorem3' },
-      { taskid: 4, text: 'lorem4' },
-      { taskid: 5, text: 'lorem5' },
-      { taskid: 6, text: 'lorem6' },
-      { taskid: 7, text: 'lorem7' },
-      { taskid: 8, text: 'lorem8' },
-      { taskid: 9, text: 'lorem9' },
-      { taskid: 10, text: 'lorem10' },
+      {  text: 'lorem1' },
+      {  text: 'lorem2' },
+      {  text: 'lorem3' },
+      {  text: 'lorem4' },
+      { text: 'lorem5' },
+      { text: 'lorem6' },
+      { text: 'lorem7' },
+      { text: 'lorem8' },
+      { text: 'lorem9' },
+      { text: 'lorem10' },
       
     ];
     const text = textData.map((text) => ({

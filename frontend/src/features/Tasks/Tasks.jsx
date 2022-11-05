@@ -10,7 +10,6 @@ import { delTask } from './tasksSlice';
 function Tasks() {
   const { addModalIsOpen } = useSelector(state => state.modal)
   const { delModalIsOpen } = useSelector(state => state.modal)
-  const dispatch = useDispatch()
   return (
     <div>
  <SideBar/>

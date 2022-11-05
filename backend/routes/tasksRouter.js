@@ -21,7 +21,7 @@ tasksRouter.get('/', async (req, res) => {
 
 tasksRouter.post('/', async (req, res) => {
   const  value = req.body.label;
-  console.log('===>', value);
+  if(value){
   try {
     const newTask = await Task.create({
        label: value,
@@ -29,6 +29,7 @@ tasksRouter.post('/', async (req, res) => {
     res.json(newTask);
   } catch ({ message }) {
     res.json({ message: "item not created" });
+  }
   }
 });
 

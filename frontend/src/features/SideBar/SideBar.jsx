@@ -4,12 +4,14 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { openAddModal, openDelModal } from '../ModalWindow/modalSlice';
-import { loadTasks, delTask, removeTask } from '../Tasks/tasksSlice';
+import { loadTasks, delTask, removeTask, loadText, addTask } from '../Tasks/tasksSlice';
 const { Header, Content, Footer, Sider } = Layout;
 
 const SideBar = () => {
     const dispatch = useDispatch()
-    const { tasks } = useSelector((state) => state.tasks)
+    const { tasks } = useSelector(state => state.tasks)
+    const { text } = useSelector (state => state.tasks)
+
     const items1 = [
       {
           key: 0,
@@ -75,12 +77,12 @@ dispatch(loadTasks())
               ? 
               tasks.map(el => {
               return  {id: el.id, label: el.label, onClick: function () {
-                // dispatch(openDelModal())
-                dispatch(delTask(el.id))
+                // dispatch(delTask(el.id))
+                   dispatch(loadText(el.id))
               }}
             }) 
             : 
-            [{label: "loading tasks"}]}
+            [{label: ""}]}
           />
         </Sider>
         <Content
@@ -89,7 +91,7 @@ dispatch(loadTasks())
             minHeight: 280,
           }}
         >
-          <h1>kek</h1>
+          <p>{text.text}</p>
         </Content>
       </Layout>
     </Content>

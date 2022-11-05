@@ -8,7 +8,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       label: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
+       
       },
       createdAt: {
         allowNull: false,

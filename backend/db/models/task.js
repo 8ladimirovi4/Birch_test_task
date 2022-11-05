@@ -1,4 +1,3 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
@@ -21,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER
       },
       label: {
-        type: DataTypes.TEXT
+        allowNull: false,
+        type: DataTypes.TEXT,
       },
       createdAt: {
         allowNull: false,

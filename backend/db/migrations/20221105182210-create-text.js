@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
    const attributes ={
@@ -9,16 +8,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       text: {
-        type: Sequelize.TEXT
-      },
-      taskid: {
-        type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Tasks', // название таблицы!
-          key: 'id', // по умолчанию 'id', можно не писать
-        },
-        onDelete: "cascade",
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
