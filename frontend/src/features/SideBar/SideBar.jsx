@@ -89,7 +89,7 @@ dispatch(loadTasks())
             minHeight: 280,
           }}
         >
-          Content
+          <h1>kek</h1>
         </Content>
       </Layout>
     </Content>

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
    const attributes = {
@@ -10,9 +9,6 @@ module.exports = {
       },
       label: {
         type: Sequelize.TEXT
-      },
-      typeid: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

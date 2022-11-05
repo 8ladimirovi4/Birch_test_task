@@ -23,9 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       label: {
         type: DataTypes.TEXT
       },
-      typeid: {
-        type: DataTypes.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE
