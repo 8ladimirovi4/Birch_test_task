@@ -3,7 +3,7 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { openAddModal } from '../ModalWindow/modalSlice';
+import { openAddModal, openDelModal } from '../ModalWindow/modalSlice';
 import { loadTasks } from '../Tasks/tasksSlice';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -33,16 +33,6 @@ const SideBar = () => {
     }
   }
   ];
-
-//   const items2 = [
-//     {
-//     key: 1,
-//     label: 'task',
-//     onClick: function () {
-//         console.log('===>', )
-//       }
-//     }
-// ]
 
 useEffect(() => {
 dispatch(loadTasks())
@@ -84,7 +74,7 @@ dispatch(loadTasks())
               tasks.length 
               ? 
               tasks.map(el => {
-              return  {id: el.id, label: el.label, onClick: function () {console.log(el.id)}}
+              return  {id: el.id, label: el.label, onClick: function () {dispatch(openDelModal())}}
             }) 
             : 
             [{label: "loading tasks"}]}

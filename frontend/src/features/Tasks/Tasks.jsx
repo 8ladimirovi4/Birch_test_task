@@ -1,15 +1,19 @@
 import React from 'react';
-import ModalWindow from '../ModalWindow/ModalWindow';
+
 import SideBar from '../SideBar/SideBar';
-import {useSelector, useDispatch} from 'react-redux'
-import { openAddModal } from '../ModalWindow/modalSlice';
+import {useSelector } from 'react-redux'
+import AddModalWindow  from '../ModalWindow/AddModalWindow';
+import DelModalWindow from '../ModalWindow/DelModalWindow';
+
 
 function Tasks() {
-  const { isOpen } = useSelector((state) => state.modal)
+  const { addModalIsOpen } = useSelector(state => state.modal)
+  const { delModalIsOpen } = useSelector(state => state.modal)
   return (
     <div>
  <SideBar/>
-{isOpen ? <ModalWindow/> : null}
+{ addModalIsOpen ? <AddModalWindow/> : null}
+{ delModalIsOpen ? <DelModalWindow/> : null }
     </div>
   );
 }

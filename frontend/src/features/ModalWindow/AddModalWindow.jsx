@@ -3,13 +3,13 @@ import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux'
 import { closeAddModal } from './modalSlice';
 
-const ModalWindow = () => {
+const AddModalWindow = () => {
   //useState не используется. Связан с antDesign. Без него падает приложение
   const [isModalOpen, setIsModalOpen] = useState(true);
   const taskTarget = useRef()
   const descriptionTarget = useRef()
-
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  
   const handleOk = () => {
  console.log(taskTarget.current.value)
  console.log(descriptionTarget.current.value)
@@ -28,4 +28,4 @@ const dispatch = useDispatch()
     </>
   );
 };
-export default ModalWindow;
+export default AddModalWindow;
