@@ -18,6 +18,7 @@ module.exports = {
           model: 'PetTypes', // название таблицы!
           key: 'id', // по умолчанию 'id', можно не писать
         },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,

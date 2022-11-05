@@ -9,6 +9,7 @@ module.exports = {
           model: 'Owners', // название таблицы!11
           key: 'id',
         },
+        onDelete: "cascade",
       },
       petId: {
         type: Sequelize.INTEGER,
@@ -18,6 +19,7 @@ module.exports = {
           model: 'Pets', // название таблицы!11
           key: 'id',
         },
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,
