@@ -46,4 +46,18 @@ tasksRouter.delete("/:id", async (req, res) => {
     ({message: 'task didn\'t deleted'})
   }
 })
+
+tasksRouter.put('/:id', async (req,res) => {
+  const { id } = req.params
+  const { label } = req.body
+  try {
+    await Task.update({label},{
+  where: { id },
+      returning: true
+    })
+    res.json({success: true})
+  } catch (error) {
+    res.json(error.message)
+  }
+})
 module.exports = tasksRouter;

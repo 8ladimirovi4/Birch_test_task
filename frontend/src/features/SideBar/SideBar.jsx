@@ -119,6 +119,7 @@ dispatch(loadTasks())
                      // dispatch(delTask(el.id))
                   }else if(edit) {
                     dispatch(openEditModal())
+                    dispatch(getTaskId(el.id))
                   }else {
                    dispatch(loadText(el.id))
                   }

@@ -11,8 +11,7 @@ const AddModalWindow = () => {
   const descriptionTarget = useRef()
   const dispatch = useDispatch()
   const { tasks } = useSelector(state => state.tasks)
-  console.log(tasks[tasks.length - 1].id);
-
+  
   const handleOk = () => {
     dispatch(createTask(taskTarget.current.value))
     dispatch(createText(descriptionTarget.current.value))

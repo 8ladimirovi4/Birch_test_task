@@ -100,8 +100,9 @@ const createText = createAsyncThunk(
 const editTask = createAsyncThunk(
   'task/editTask',
   async function ({ value, id }, {rejectWithValue, dispatch}) {
+    console.log(value);
+    console.log(id);
     try {
-      
       const response = await fetch(`http://localhost:3001/tasks/${id}`,{
         method: "PUT",
         body: JSON.stringify({
@@ -161,5 +162,5 @@ const tasksSlice = createSlice({
 });
 
 export const { removeTask, addTask } = tasksSlice.actions
-export { loadTasks, delTask, createTask, loadText, createText };
+export { loadTasks, delTask, createTask, loadText, createText, editTask };
 export default tasksSlice.reducer;
