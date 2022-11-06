@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
 import { loadTasks, delTask, removeTask, loadText, addTask } from '../Tasks/tasksSlice';
@@ -14,6 +14,8 @@ const SideBar = () => {
     const { text } = useSelector (state => state.tasks)
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
+    const textValue = useRef()
+    const textID = useRef()
 
 
     const items1 = [
@@ -72,6 +74,10 @@ if(edit){
 useEffect(() => {
 dispatch(loadTasks())
 },[dispatch])
+
+function editTextArea (e) {
+console.log(e.target.value)
+}
 
    return(
     <>
@@ -135,7 +141,9 @@ dispatch(loadTasks())
             minHeight: 280,
           }}
         >
-          <p>{text.text}</p>
+          <textarea defaultValue={text.text} onChange={editTextArea} >
+
+          </textarea>
         </Content>
       </Layout>
     </Content>

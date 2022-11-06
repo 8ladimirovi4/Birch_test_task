@@ -11,7 +11,7 @@ const AddModalWindow = () => {
   const descriptionTarget = useRef()
   const dispatch = useDispatch()
   const { tasks } = useSelector(state => state.tasks)
-  
+
   const handleOk = () => {
     dispatch(createTask(taskTarget.current.value))
     dispatch(createText(descriptionTarget.current.value))
@@ -24,8 +24,8 @@ const AddModalWindow = () => {
     <>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <form type='submit'>
-<input type="text" ref={taskTarget}/>
-<input type="text" ref={descriptionTarget}/>
+<input type="text" ref={taskTarget} placeholder="enter subject"/>
+<input type="text" ref={descriptionTarget} placeholder="enter text"/>
       </form>
       </Modal>
     </>

@@ -10,8 +10,7 @@ function EditModalWindow() {
   const dispatch = useDispatch()
   const { taskid } = useSelector(state => state.modal)
   const taskTarget = useRef()
-  console.log(taskid);
-  
+
   const handleOk = () => {
   dispatch(closeEditModal())
   dispatch(editTask({ value: taskTarget.current.value , id: taskid }))

@@ -77,7 +77,7 @@ try {
 )
 
 const createText = createAsyncThunk(
-  'tassks/createText',
+  'tasks/createText',
   async function (value,{rejectWithValue, dispatch}) {
     try {
       const response = await fetch(`http://localhost:3001/text`,{
@@ -98,7 +98,7 @@ const createText = createAsyncThunk(
 )
 
 const editTask = createAsyncThunk(
-  'task/editTask',
+  'tasks/editTask',
   async function ({ value, id }, {rejectWithValue, dispatch}) {
     try {
       const response = await fetch(`http://localhost:3001/tasks/${id}`,{
@@ -109,7 +109,7 @@ const editTask = createAsyncThunk(
         headers: { "Content-Type": "application/json" },
       })
       if(!response.ok){
-        throw new Error ('Can\'t edit tasr. Server error')
+        throw new Error ('Can\'t edit task. Server error')
       }
       const data = await response.json()
       dispatch(renameTask({data, id}))
@@ -117,6 +117,28 @@ const editTask = createAsyncThunk(
       rejectWithValue(error.messge)
     }
     }
+)
+
+const editText = createAsyncThunk(
+  'tasks/editText',
+  async function ({value, id}, {rejectWithValue, dispatch}){
+    try {
+      
+      const response = await fetch(`http://localhost:3001/text/${id}`,{
+        method: "PUT",
+        body: JSON.stringify({
+          text: value
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+      if(!response.ok){
+        throw new Error ('Can\'t edit text. Server error')
+      }
+      const data = await response.json()
+    } catch (error) {
+      rejectWithValue(error.message)
+    }
+  }
 )
 
 
