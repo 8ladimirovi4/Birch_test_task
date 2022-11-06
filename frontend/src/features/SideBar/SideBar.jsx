@@ -1,16 +1,19 @@
 import 'antd/dist/antd.css'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { openAddModal, openDelModal } from '../ModalWindow/modalSlice';
+import { getTaskId, openAddModal, openDelModal } from '../ModalWindow/modalSlice';
 import { loadTasks, delTask, removeTask, loadText, addTask } from '../Tasks/tasksSlice';
+import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
 
 const SideBar = () => {
     const dispatch = useDispatch()
     const { tasks } = useSelector(state => state.tasks)
     const { text } = useSelector (state => state.tasks)
+    const [del, setDel] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     const items1 = [
       {
@@ -18,23 +21,52 @@ const SideBar = () => {
           label: 'add',
           onClick: function () {
               dispatch(openAddModal())
+              setEdit(false)
+              setDel(false)
           }
         },
         {
           key: 1,
           label: 'edit',
           onClick: function () {
-            console.log('2', )
+            setEdit(prev => ! prev)
+            setDel(false)
           }
         },
       {
     key: 2,
     label: 'delete',
     onClick: function () {
-      console.log('3')
+      setDel(prev => !prev)
+      setEdit(false)
+      
     }
   }
   ];
+
+  if(del){
+    items1.push(
+      {
+        key: 3,
+        label: 'ok',
+        onClick: function () {
+          setDel(prev => !prev)
+        }
+      }
+    )
+}
+
+if(edit){
+  items1.push(
+    {
+      key: 4,
+      label: 'ok',
+      onClick: function () {
+      setEdit(prev => !prev)
+      }
+    }
+  )
+}
 
 useEffect(() => {
 dispatch(loadTasks())
@@ -76,9 +108,17 @@ dispatch(loadTasks())
               tasks.length 
               ? 
               tasks.map(el => {
-              return  {id: el.id, label: el.label, onClick: function () {
-                // dispatch(delTask(el.id))
+              return  {
+                id: el.id, 
+                label: el.label,
+                onClick: function () {
+                  if(del){
+                    dispatch(openDelModal())
+                    dispatch(getTaskId(el.id))
+                     // dispatch(delTask(el.id))
+                  }else {
                    dispatch(loadText(el.id))
+                  }
               }}
             }) 
             : 
