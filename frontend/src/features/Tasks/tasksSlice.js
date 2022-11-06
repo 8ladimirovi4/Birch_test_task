@@ -97,6 +97,28 @@ const createText = createAsyncThunk(
   }
 )
 
+const editTask = createAsyncThunk(
+  'task/editTask',
+  async function ({ value, id }, {rejectWithValue, dispatch}) {
+    try {
+      
+      const response = await fetch(`http://localhost:3001/tasks/${id}`,{
+        method: "PUT",
+        body: JSON.stringify({
+          label: value
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+      if(!response.ok){
+        throw new Error ('Can\'t edit tasr. Server error')
+      }
+      const data = await response.json()
+    } catch (error) {
+      rejectWithValue(error.messge)
+    }
+    }
+)
+
 
 const tasksSlice = createSlice({
   name: 'tasks',

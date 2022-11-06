@@ -3,7 +3,7 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getTaskId, openAddModal, openDelModal } from '../ModalWindow/modalSlice';
+import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
 import { loadTasks, delTask, removeTask, loadText, addTask } from '../Tasks/tasksSlice';
 import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
@@ -14,6 +14,7 @@ const SideBar = () => {
     const { text } = useSelector (state => state.tasks)
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
+
 
     const items1 = [
       {
@@ -116,6 +117,8 @@ dispatch(loadTasks())
                     dispatch(openDelModal())
                     dispatch(getTaskId(el.id))
                      // dispatch(delTask(el.id))
+                  }else if(edit) {
+                    dispatch(openEditModal())
                   }else {
                    dispatch(loadText(el.id))
                   }

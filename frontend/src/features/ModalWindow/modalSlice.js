@@ -4,30 +4,45 @@ const initialState = {
   type: '',
   addModalIsOpen: false,
   delModalIsOpen: false,
-  taskid: {}
+  editModalIsOpen: false,
+  taskid: {},
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    openAddModal: (state, action) => {
+    openAddModal: (state) => {
       state.addModalIsOpen = true;
     },
-    closeAddModal: (state, action) => {
+    closeAddModal: (state) => {
       state.addModalIsOpen = false;
     },
-    openDelModal: (state, action) => {
+    openDelModal: (state) => {
       state.delModalIsOpen = true;
     },
-    closeDelModal: (state, actio) => {
-      state.delModalIsOpen = false
+    closeDelModal: (state) => {
+      state.delModalIsOpen = false;
+    },
+    openEditModal: (state) => {
+      state.editModalIsOpen = true;
+    },
+    closeEditModal: (state) => {
+      state.editModalIsOpen = false;
     },
     getTaskId: (state, action) => {
-      state.taskid = action.payload
-    }
+      state.taskid = action.payload;
+    },
   },
 });
 
-export const { openAddModal, closeAddModal, openDelModal, closeDelModal, getTaskId } = modalSlice.actions;
+export const {
+  openAddModal,
+  closeAddModal,
+  openDelModal,
+  closeDelModal,
+  getTaskId,
+  closeEditModal,
+  openEditModal
+} = modalSlice.actions;
 export default modalSlice.reducer;
