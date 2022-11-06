@@ -51,11 +51,12 @@ tasksRouter.put('/:id', async (req,res) => {
   const { id } = req.params
   const { label } = req.body
   try {
-    await Task.update({label},{
+    const data = await Task.update({label},{
   where: { id },
       returning: true
     })
-    res.json({success: true})
+   const [_, arr] = data
+   res.json(arr.map(el => el.label).join(''))
   } catch (error) {
     res.json(error.message)
   }

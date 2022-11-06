@@ -100,8 +100,6 @@ const createText = createAsyncThunk(
 const editTask = createAsyncThunk(
   'task/editTask',
   async function ({ value, id }, {rejectWithValue, dispatch}) {
-    console.log(value);
-    console.log(id);
     try {
       const response = await fetch(`http://localhost:3001/tasks/${id}`,{
         method: "PUT",
@@ -114,6 +112,7 @@ const editTask = createAsyncThunk(
         throw new Error ('Can\'t edit tasr. Server error')
       }
       const data = await response.json()
+      dispatch(renameTask({data, id}))
     } catch (error) {
       rejectWithValue(error.messge)
     }
@@ -130,6 +129,14 @@ const tasksSlice = createSlice({
     },
     addTask: (state, action) => {
       state.tasks.push(action.payload)
+    },
+    renameTask: (state, action) => {
+      state.tasks = state.tasks.map((el) => el.id === action.payload.id 
+        ?
+        {...el, label: action.payload.data}
+        :   
+        el
+        )
     }
   },
 
@@ -161,6 +168,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { removeTask, addTask } = tasksSlice.actions
+export const { removeTask, addTask, renameTask } = tasksSlice.actions
 export { loadTasks, delTask, createTask, loadText, createText, editTask };
 export default tasksSlice.reducer;
