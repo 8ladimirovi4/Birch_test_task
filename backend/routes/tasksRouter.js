@@ -4,7 +4,8 @@ const { Task } = require('../db/models');
 
 tasksRouter.get('/', async (req, res) => {
   try {
-    const task = await Task.findAll({});
+    const task = await Task.findAll(
+    );
     res.json({
       error: null,
       data: task,

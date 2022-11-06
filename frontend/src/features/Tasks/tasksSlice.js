@@ -9,7 +9,8 @@ const initialState = {
 
 const loadTasks = createAsyncThunk(
   'tasks/loadTasks',
-  async function (_, { rejectWithValue }) {
+  async function (value, { rejectWithValue }) {
+
     try {
       const response = await fetch('http://localhost:3001/tasks');
       const body = await response.json();
@@ -162,6 +163,9 @@ const tasksSlice = createSlice({
         :   
         el
         )
+    },
+    filterTasks: (state, action) => {
+      state.tasks = state.tasks.filter(el => el.label.includes(action.payload))
     }
   },
 
@@ -172,7 +176,7 @@ const tasksSlice = createSlice({
     },
     [loadTasks.fulfilled]: (state, action) => {
       state.status = 'resolved';
-      state.tasks = action.payload;
+      state.tasks = action.payload
     },
     [loadTasks.rejected]: (state, action) => {
       state.status = 'rejected';
@@ -193,6 +197,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { removeTask, addTask, renameTask } = tasksSlice.actions
+export const { removeTask, addTask, renameTask, filterTasks } = tasksSlice.actions
 export { loadTasks, delTask, createTask, loadText, createText, editTask, editText };
 export default tasksSlice.reducer;

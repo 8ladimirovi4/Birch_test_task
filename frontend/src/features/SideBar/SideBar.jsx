@@ -4,7 +4,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
-import { loadTasks, delTask, removeTask, loadText, addTask, editText } from '../Tasks/tasksSlice';
+import { loadTasks, delTask, removeTask, loadText, addTask, editText, filterTasks } from '../Tasks/tasksSlice';
 import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -14,8 +14,9 @@ const SideBar = () => {
     const { text } = useSelector (state => state.tasks)
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
+    const [filter, setFilter] = useState(false)
     const textValue = useRef()
-
+    const filterValue = useRef()
     const items1 = [
       {
           key: 0,
@@ -42,8 +43,16 @@ const SideBar = () => {
       setEdit(false)
       
     }
+  },
+  {
+    key: 3,
+    label: <input placeholder='tasks filter' style={{color:"black", height: "30px", width:'300px' }} ref={filterValue} onChange={filterTasksFunc}/>,
+    onClick: function () {      
+    } 
   }
   ];
+
+ 
 
   if(del){
     items1.push(
@@ -71,16 +80,23 @@ if(edit){
 
 useEffect(() => {
 dispatch(loadTasks())
-},[dispatch])
+},[dispatch, filter])
 
 function editTextArea () {
 dispatch(editText({value: textValue.current.value, id: text.id}))
 }
 
+function filterTasksFunc () {
+  if(!filterValue.current.value){
+    setFilter(prev => !prev)
+  }
+  dispatch(filterTasks(filterValue.current.value))
+}
+
    return(
     <>
   <Layout>
-    <Header className="header">
+    <Header className="header"> 
       <div className="logo" />
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} />
     </Header>
@@ -155,6 +171,7 @@ dispatch(editText({value: textValue.current.value, id: text.id}))
     >
     </Footer>
   </Layout>
+ 
   </>
    )
 }
