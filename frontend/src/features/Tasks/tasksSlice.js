@@ -9,7 +9,7 @@ const initialState = {
 
 const loadTasks = createAsyncThunk(
   'tasks/loadTasks',
-  async function (value, { rejectWithValue }) {
+  async function (_,{ rejectWithValue }) {
 
     try {
       const response = await fetch('http://localhost:3001/tasks');
@@ -79,7 +79,7 @@ try {
 
 const createText = createAsyncThunk(
   'tasks/createText',
-  async function (value,{rejectWithValue, dispatch}) {
+  async function (value,{rejectWithValue}) {
     try {
       const response = await fetch(`http://localhost:3001/text`,{
         method: 'POST',
@@ -123,9 +123,6 @@ const editTask = createAsyncThunk(
 const editText = createAsyncThunk(
   'tasks/editText',
   async function ({value, id}, {rejectWithValue, dispatch}){
-
-    console.log(value);
-    console.log(id);
     try {
       const response = await fetch(`http://localhost:3001/text/${id}`,{
         method: "PUT",
@@ -138,7 +135,7 @@ const editText = createAsyncThunk(
         throw new Error ('Can\'t edit text. Server error')
       }
       const data = await response.json()
-      console.log('data===>',data);
+      dispatch(renameText({data, id}))
     } catch (error) {
       rejectWithValue(error.message)
     }
@@ -163,6 +160,14 @@ const tasksSlice = createSlice({
         :   
         el
         )
+    },
+    renameText: (state, action) => {
+      state.text = state.text.map((el) => el.id === action.payload.id 
+      ?
+      {...el, text: action.payload.data}
+      :   
+      el
+      )
     },
     filterTasks: (state, action) => {
       state.tasks = state.tasks.filter(el => el.label.includes(action.payload))
@@ -197,6 +202,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { removeTask, addTask, renameTask, filterTasks } = tasksSlice.actions
+export const { removeTask, addTask, renameTask, filterTasks, renameText } = tasksSlice.actions
 export { loadTasks, delTask, createTask, loadText, createText, editTask, editText };
 export default tasksSlice.reducer;

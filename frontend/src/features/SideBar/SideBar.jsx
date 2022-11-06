@@ -4,7 +4,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
-import { loadTasks, delTask, removeTask, loadText, addTask, editText, filterTasks } from '../Tasks/tasksSlice';
+import { loadTasks, delTask, removeTask, loadText, addTask, editText, filterTasks, addText } from '../Tasks/tasksSlice';
 import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -12,9 +12,12 @@ const SideBar = () => {
     const dispatch = useDispatch()
     const { tasks } = useSelector(state => state.tasks)
     const { text } = useSelector (state => state.tasks)
+    const { taskid } = useSelector(state => state.modal)
+    console.log(taskid);
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
     const [filter, setFilter] = useState(false)
+    const [editTextToggle, setEditTextToggle ] = useState(true)
     const textValue = useRef()
     const filterValue = useRef()
     const items1 = [
@@ -82,6 +85,10 @@ useEffect(() => {
 dispatch(loadTasks())
 },[dispatch, filter])
 
+useEffect(() => {
+  dispatch(loadText())
+  },[dispatch,editTextToggle])
+
 function editTextArea () {
 dispatch(editText({value: textValue.current.value, id: text.id}))
 }
@@ -93,6 +100,10 @@ function filterTasksFunc () {
   dispatch(filterTasks(filterValue.current.value))
 }
 
+function editTextFunc () {
+  setEditTextToggle(prev => !prev)
+  tasks.map(el =>  dispatch(loadText(el.id)))
+}
    return(
     <>
   <Layout>
@@ -136,7 +147,6 @@ function filterTasksFunc () {
                   if(del){
                     dispatch(openDelModal())
                     dispatch(getTaskId(el.id))
-                     // dispatch(delTask(el.id))
                   }else if(edit) {
                     dispatch(openEditModal())
                     dispatch(getTaskId(el.id))
@@ -153,14 +163,22 @@ function filterTasksFunc () {
           style={{
             padding: '0 24px',
             minHeight: 280,
-          }}
-        >
+          }}>
+            {editTextToggle 
+            ?
+            <p onClick={editTextFunc}>{text.text}</p>
+            :
+            <>
           <textarea 
           defaultValue={text.text} 
           onChange={editTextArea} 
           ref={textValue}>
+          </textarea> <br/>
+          <button onClick={editTextFunc}>done</button>
+          </>
+         
+}
 
-          </textarea>
         </Content>
       </Layout>
     </Content>
