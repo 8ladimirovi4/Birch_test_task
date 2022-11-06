@@ -4,7 +4,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
-import { loadTasks, delTask, removeTask, loadText, addTask } from '../Tasks/tasksSlice';
+import { loadTasks, delTask, removeTask, loadText, addTask, editText } from '../Tasks/tasksSlice';
 import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -15,8 +15,6 @@ const SideBar = () => {
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
     const textValue = useRef()
-    const textID = useRef()
-
 
     const items1 = [
       {
@@ -75,8 +73,8 @@ useEffect(() => {
 dispatch(loadTasks())
 },[dispatch])
 
-function editTextArea (e) {
-console.log(e.target.value)
+function editTextArea () {
+dispatch(editText({value: textValue.current.value, id: text.id}))
 }
 
    return(
@@ -141,7 +139,10 @@ console.log(e.target.value)
             minHeight: 280,
           }}
         >
-          <textarea defaultValue={text.text} onChange={editTextArea} >
+          <textarea 
+          defaultValue={text.text} 
+          onChange={editTextArea} 
+          ref={textValue}>
 
           </textarea>
         </Content>

@@ -122,8 +122,10 @@ const editTask = createAsyncThunk(
 const editText = createAsyncThunk(
   'tasks/editText',
   async function ({value, id}, {rejectWithValue, dispatch}){
+
+    console.log(value);
+    console.log(id);
     try {
-      
       const response = await fetch(`http://localhost:3001/text/${id}`,{
         method: "PUT",
         body: JSON.stringify({
@@ -135,6 +137,7 @@ const editText = createAsyncThunk(
         throw new Error ('Can\'t edit text. Server error')
       }
       const data = await response.json()
+      console.log('data===>',data);
     } catch (error) {
       rejectWithValue(error.message)
     }
@@ -191,5 +194,5 @@ const tasksSlice = createSlice({
 });
 
 export const { removeTask, addTask, renameTask } = tasksSlice.actions
-export { loadTasks, delTask, createTask, loadText, createText, editTask };
+export { loadTasks, delTask, createTask, loadText, createText, editTask, editText };
 export default tasksSlice.reducer;

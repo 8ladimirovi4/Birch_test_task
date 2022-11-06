@@ -49,4 +49,23 @@ textRouter.delete("/:id", async (req, res) => {
     ({message: 'text didn\'t deleted'})
   }
 })
+
+textRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+  try {
+    const data = await Text.update(
+      { text },
+      {
+        where: { id },
+        returning: true,
+      }
+    );
+    const [_, arr] = data;
+    res.json(arr.map((el) => el.label).join(''));
+    console.log(arr);
+  } catch (error) {
+    res.json(error.message);
+  }
+});
 module.exports = textRouter;
