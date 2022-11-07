@@ -24,8 +24,10 @@ const AddModalWindow = () => {
     <>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
       <form type='submit'>
-<input type="text" ref={taskTarget} placeholder="enter subject"/>
-<input type="text" ref={descriptionTarget} placeholder="enter text"/>
+<input type="text" ref={taskTarget} placeholder="Enter subject" style={{width: '400px'}}/> 
+<br/>
+<br/>
+<input type="text" ref={descriptionTarget} placeholder="Enter text" style={{height: '200px', width:'400px'}}/>
       </form>
       </Modal>
     </>

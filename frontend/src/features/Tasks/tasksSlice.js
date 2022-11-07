@@ -57,6 +57,23 @@ try {
   }
 )
 
+const delText=  createAsyncThunk(
+  'tasks/delTask',
+  async function (id, {rejectWithValue, dispatch}) {
+try {
+  const response = await fetch (`http://localhost:3001/text/${id}`,{
+    method: "DELETE",
+  })
+  if(!response.ok){
+    throw new Error ('Can\'t delete text, Server error')
+  }
+  dispatch(removeText(id));
+} catch (error) {
+  return rejectWithValue(error.message)
+}
+  }
+)
+
 const createTask = createAsyncThunk(
   'tasks/createTask',
   async function (value, { rejectWithValue, dispatch }) {
@@ -202,6 +219,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { removeTask, addTask, renameTask, filterTasks, renameText } = tasksSlice.actions
-export { loadTasks, delTask, createTask, loadText, createText, editTask, editText };
+export const { removeTask, addTask, renameTask, filterTasks, renameText, removeText } = tasksSlice.actions
+export { loadTasks, delTask, createTask, loadText, createText, editTask, editText, delText };
 export default tasksSlice.reducer;

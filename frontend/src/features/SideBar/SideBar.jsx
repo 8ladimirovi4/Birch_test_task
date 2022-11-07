@@ -19,10 +19,12 @@ const SideBar = () => {
     const [editTextToggle, setEditTextToggle ] = useState(true)
     const textValue = useRef()
     const filterValue = useRef()
-    const items1 = [
+
+    let items1
+    items1 = [
       {
           key: 0,
-          label: 'add',
+          label: 'Add Task',
           onClick: function () {
               dispatch(openAddModal())
               setEdit(false)
@@ -31,7 +33,7 @@ const SideBar = () => {
         },
         {
           key: 1,
-          label: 'edit',
+          label: 'Edit Task',
           onClick: function () {
             setEdit(prev => ! prev)
             setDel(false)
@@ -39,7 +41,7 @@ const SideBar = () => {
         },
       {
     key: 2,
-    label: 'delete',
+    label: 'Delete Task',
     onClick: function () {
       setDel(prev => !prev)
       setEdit(false)
@@ -57,27 +59,35 @@ const SideBar = () => {
  
 
   if(del){
-    items1.push(
+  items1 = [
       {
-        key: 10,
-        label: 'ok',
+        key: 1,
+        label: 'press "Done" to finish operatioin',
+      },
+      {
+        key: 2,
+        label: 'Done',
         onClick: function () {
           setDel(prev => !prev)
         }
-      }
-    )
+      },
+    ]
 }
 
 if(edit){
-  items1.push(
+  items1 = [
     {
-      key: 4,
-      label: 'ok',
+      key: 1,
+      label: 'press "Done" to finish operatioin',
+    },
+    {
+      key: 2,
+      label: 'Done',
       onClick: function () {
-      setEdit(prev => !prev)
+        setEdit(prev => !prev)
       }
-    }
-  )
+    },
+  ]
 }
 
 useEffect(() => {
@@ -170,7 +180,9 @@ function editTextFunc () {
           <textarea 
           defaultValue={text.text} 
           onChange={editTextArea} 
-          ref={textValue}>
+          ref={textValue}
+          style={{width: '500px', height: '300px'}}
+          >
           </textarea> <br/>
           <button onClick={() => {editTextFunc(); dispatch(loadText(textid))}}>done</button>
           </>

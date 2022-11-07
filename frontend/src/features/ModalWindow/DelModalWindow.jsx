@@ -1,7 +1,7 @@
 import { Modal } from 'antd';
 import { React, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { delTask, removeTask } from '../Tasks/tasksSlice';
+import { delTask, loadText, removeTask } from '../Tasks/tasksSlice';
 import { closeDelModal } from './modalSlice';
 
 
@@ -11,9 +11,10 @@ function DelModalWindow() {
     const [isModalOpen, setIsModalOpen] = useState(true);
     const dispatch = useDispatch()
     const { taskid } = useSelector(state => state.modal)
-
+console.log(taskid);
     const handleOk = () => {
       dispatch(delTask(taskid))
+      dispatch(removeTask(taskid))
       dispatch(closeDelModal())
          };
     const handleCancel = () => {
