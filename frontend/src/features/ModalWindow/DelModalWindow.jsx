@@ -11,7 +11,6 @@ function DelModalWindow() {
     const [isModalOpen, setIsModalOpen] = useState(true);
     const dispatch = useDispatch()
     const { taskid } = useSelector(state => state.modal)
-console.log(taskid);
     const handleOk = () => {
       dispatch(delTask(taskid))
       dispatch(delText(taskid))

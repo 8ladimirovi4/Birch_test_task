@@ -167,6 +167,10 @@ const tasksSlice = createSlice({
     removeTask: (state, action) => {
       state.tasks = state.tasks.filter(el => el.id !== action.payload)
     },
+    removeText: (state, action) => {
+      state.text = state.tasks.filter(el => el.id !== action.payload)
+      console.log(action.payload);
+    },
     addTask: (state, action) => {
       state.tasks.push(action.payload)
     },
