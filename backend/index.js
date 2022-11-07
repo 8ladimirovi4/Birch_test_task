@@ -7,10 +7,6 @@ const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 
 const passUserFromSession = require('./middleware/passUserFromSession');
-const indexRouter = require('./routes/indexRouter');
-const petsRouter = require('./routes/petsRouter');
-const typesRouter = require('./routes/typesRouter');
-const authRouter = require('./routes/authRouter');
 const { sequelize } = require('./db/models');
 const tasksRouter = require('./routes/tasksRouter');
 const textRouter = require('./routes/textRouter');
@@ -53,10 +49,6 @@ app.use(express.json());
 app.use(cors({ origin: ['http://localhost:3000'] }));
 
 // Подключение промежуточных функций-роутеров
-app.use('/', indexRouter);
-app.use('/pets', petsRouter);
-app.use('/types', typesRouter);
-app.use('/auth', authRouter);
 app.use('/tasks', tasksRouter);
 app.use('/text', textRouter);
 // Слушать порт
