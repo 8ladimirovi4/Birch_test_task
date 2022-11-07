@@ -4,8 +4,7 @@ const { Task } = require('../db/models');
 
 tasksRouter.get('/', async (req, res) => {
   try {
-    const task = await Task.findAll(
-    );
+    const task = await Task.findAll();
     res.json({
       error: null,
       data: task,
@@ -21,7 +20,7 @@ tasksRouter.get('/', async (req, res) => {
 tasksRouter.post('/', async (req, res) => {
   const value1 = req.body.label;
   const value2 = req.body.check;
-  if (value1 !=='' && value2 !=='') {
+  if (value1 !== '' && value2 !== '') {
     try {
       const newTask = await Task.create({
         label: value1,
@@ -49,19 +48,20 @@ tasksRouter.delete('/:id', async (req, res) => {
 tasksRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { label } = req.body;
-  try {
-    const data = await Task.update(
-      { label },
-      {
-        where: { id },
-        returning: true,
-      }
-    );
-    const [_, arr] = data;
-    res.json(arr.map((el) => el.label).join(''));
-  
-  } catch (error) {
-    res.json(error.message);
+  if (req.body.label !== '') {
+    try {
+      const data = await Task.update(
+        { label },
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+      const [_, arr] = data;
+      res.json(arr.map((el) => el.label).join(''));
+    } catch (error) {
+      res.json(error.message);
+    }
   }
 });
 module.exports = tasksRouter;

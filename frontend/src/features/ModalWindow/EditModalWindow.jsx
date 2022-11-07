@@ -24,7 +24,7 @@ function EditModalWindow() {
     <div>
        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
        <form type='submit'>
-<input type="text" placeholder='edit task'ref={taskTarget}/>
+<input type="text" placeholder='edit task'ref={taskTarget} style={{width: '400px', height: '30px'}}/>
       </form>
       </Modal>
     </div>
