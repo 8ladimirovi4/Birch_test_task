@@ -23,7 +23,6 @@ textRouter.get('/:id', async (req, res) => {
 textRouter.post('/', async (req, res) => {
   const  value = req.body.text;
   const id = req.body.taskid;
-  if(value){
   try {
     const newText = await Text.create({
        text: value,
@@ -33,7 +32,6 @@ textRouter.post('/', async (req, res) => {
   } catch ({ message }) {
     res.json({ message: "text did not created" });
   }
-}
 });
 
 

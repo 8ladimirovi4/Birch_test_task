@@ -6,6 +6,7 @@ const initialState = {
   delModalIsOpen: false,
   editModalIsOpen: false,
   taskid: {},
+  textid: {}
 };
 
 const modalSlice = createSlice({
@@ -33,6 +34,9 @@ const modalSlice = createSlice({
     getTaskId: (state, action) => {
       state.taskid = action.payload;
     },
+    getTextId: (state, action) => {
+      state.textid = action.payload;
+    },
   },
 });
 
@@ -43,6 +47,7 @@ export const {
   closeDelModal,
   getTaskId,
   closeEditModal,
-  openEditModal
+  openEditModal,
+  getTextId
 } = modalSlice.actions;
 export default modalSlice.reducer;

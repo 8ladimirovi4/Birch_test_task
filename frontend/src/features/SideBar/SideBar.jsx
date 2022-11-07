@@ -3,7 +3,7 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { React, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getTaskId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
+import { getTaskId, getTextId, openAddModal, openDelModal, openEditModal } from '../ModalWindow/modalSlice';
 import { loadTasks, delTask, removeTask, loadText, addTask, editText, filterTasks, addText } from '../Tasks/tasksSlice';
 import DelModalWindow from '../ModalWindow/DelModalWindow';
 const { Header, Content, Footer, Sider } = Layout;
@@ -12,8 +12,7 @@ const SideBar = () => {
     const dispatch = useDispatch()
     const { tasks } = useSelector(state => state.tasks)
     const { text } = useSelector (state => state.tasks)
-    const { taskid } = useSelector(state => state.modal)
-    console.log(taskid);
+    const { textid } = useSelector(state => state.modal)
     const [del, setDel] = useState(false)
     const [edit, setEdit] = useState(false)
     const [filter, setFilter] = useState(false)
@@ -60,7 +59,7 @@ const SideBar = () => {
   if(del){
     items1.push(
       {
-        key: 3,
+        key: 10,
         label: 'ok',
         onClick: function () {
           setDel(prev => !prev)
@@ -102,7 +101,6 @@ function filterTasksFunc () {
 
 function editTextFunc () {
   setEditTextToggle(prev => !prev)
-  tasks.map(el =>  dispatch(loadText(el.id)))
 }
    return(
     <>
@@ -166,7 +164,7 @@ function editTextFunc () {
           }}>
             {editTextToggle 
             ?
-            <p onClick={editTextFunc}>{text.text}</p>
+            <p onClick={()=> {editTextFunc(); dispatch(getTextId(text.id))}}>{text.text}</p>
             :
             <>
           <textarea 
@@ -174,7 +172,7 @@ function editTextFunc () {
           onChange={editTextArea} 
           ref={textValue}>
           </textarea> <br/>
-          <button onClick={editTextFunc}>done</button>
+          <button onClick={() => {editTextFunc(); dispatch(loadText(textid))}}>done</button>
           </>
          
 }
