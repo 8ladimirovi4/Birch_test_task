@@ -37,7 +37,7 @@ textRouter.post('/', async (req, res) => {
 
 textRouter.delete("/:id", async (req, res) => {
   try {
-    await Task.destroy({
+    await Text.destroy({
       where: {
         id: Number(req.params.id),
       },
