@@ -19,11 +19,12 @@ tasksRouter.get('/', async (req, res) => {
 });
 
 tasksRouter.post('/', async (req, res) => {
-  const value = req.body.label;
-  if (value) {
+  const value1 = req.body.label;
+  const value2 = req.body.check;
+  if (value1 !=='' && value2 !=='') {
     try {
       const newTask = await Task.create({
-        label: value,
+        label: value1,
       });
       res.json(newTask);
     } catch ({ message }) {

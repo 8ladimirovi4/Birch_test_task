@@ -76,11 +76,11 @@ try {
 
 const createTask = createAsyncThunk(
   'tasks/createTask',
-  async function (value, { rejectWithValue, dispatch }) {
+  async function ({ label: value1, check: value2}, { rejectWithValue, dispatch }) {
 try {
   const response = await fetch('http://localhost:3001/tasks',{
     method: "POST",
-    body: JSON.stringify({label: value}),
+    body: JSON.stringify({label: value1, check: value2}),
     headers: { "Content-Type": "application/json" }
   })
   if(!response.ok){
@@ -96,13 +96,11 @@ try {
 
 const createText = createAsyncThunk(
   'tasks/createText',
-  async function (value,{rejectWithValue}) {
+  async function ({ text: value1, check: value2},{rejectWithValue}) {
     try {
       const response = await fetch(`http://localhost:3001/text`,{
         method: 'POST',
-        body: JSON.stringify({
-          text: value, 
-        }),
+        body: JSON.stringify({text: value1, check: value2}),
         headers: { "Content-Type": "application/json" }
       })
       if(!response.ok){

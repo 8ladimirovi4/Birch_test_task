@@ -21,18 +21,22 @@ textRouter.get('/:id', async (req, res) => {
 });
 
 textRouter.post('/', async (req, res) => {
-  const  value = req.body.text;
+  const  value1 = req.body.text;
+  const  value2 = req.body.check;
   const id = req.body.taskid;
+  if (value1 !== '' && value2 !== ''){
   try {
     const newText = await Text.create({
-       text: value,
+       text: value1,
        taskid: id
     });
     res.json(newText);
   } catch ({ message }) {
     res.json({ message: "text did not created" });
   }
-});
+}
+})
+
 
 
 textRouter.delete("/:id", async (req, res) => {

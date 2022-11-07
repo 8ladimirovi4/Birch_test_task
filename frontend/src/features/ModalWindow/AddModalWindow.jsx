@@ -13,8 +13,8 @@ const AddModalWindow = () => {
   const { tasks } = useSelector(state => state.tasks)
 
   const handleOk = () => {
-    dispatch(createTask(taskTarget.current.value))
-    dispatch(createText(descriptionTarget.current.value))
+    dispatch(createTask({label: taskTarget.current.value, check: descriptionTarget.current.value}))
+    dispatch(createText({text: descriptionTarget.current.value, check: taskTarget.current.value}))
     dispatch(closeAddModal())
   };
   const handleCancel = () => {
